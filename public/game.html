@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ahorcado en Tiempo Real</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="hangman-display"> <!-- Representación visual del muñeco --></div>
+    <div class="centro">
+        <h1>Juego del Ahorcado</h1>
+        
+        <div id="message-box">
+            <p id="message-text"></p>
+          </div>
+        <div id="word-display"></div>
+        <div id="guesses">Letras ya intentadas:</div>
+        <input type="text" id="guess-input" placeholder="Ingresa una letra" maxlength="1" />
+        <button id="guess-button">Intentar</button>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="main.js"></script>
+  
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>🌟 Trivia Extravaganza - Create or Join a Room! ✨</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #eb96eb;
+    }
+    h1 {
+      
+      color: #ff69b4;
+      font-size: 48px;
+      margin-top: 30px;
+    }
+
+    .titule{
+      margin-left: 3%;
+      width: 40%;
+    }
+    h2 {
+      color: #5a2a99;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    #roomCode {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #ff69b4;
+    }
+    input[type="text"] {
+      padding: 10px;
+      margin-right: 5px;
+      border-radius: 8px;
+      border: 2px solid #ff69b4;
+    }
+    button {
+      background-color: #ff69b4;
+      color: white;
+      padding: 14px 32px;
+      border: none;
+      cursor: pointer;
+      margin-bottom: 20px;
+      border-radius: 24px;
+      font-size: 18px;
+      letter-spacing: 1px;
+      transition: background-color 0.3s ease;
+      text-transform: uppercase;
+    }
+    button:hover {
+      background-color: #f550a0;
+    }
+    p {
+      margin-bottom: 10px;
+    }
+    /* Estilo para la disposición de los divs */
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .create {
+      text-align: right;
+      margin-top: 20px;
+      margin-right: 20px;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    .entrar {
+      margin-top: 10%;
+      text-align: center;
+      padding: 50px;
+      background-color: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    @media screen and (max-width: 850px) {
+      .titule {
+        display: none;
+      }
+
+      .entrar {
+      margin-top: 50%;
+      text-align: center;
+      padding: 50px;
+      background-color: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    }
+
+    @media screen and (max-width: 600px) {
+      .create {
+      text-align: right;
+      margin-top: 20px;
+      margin-right: 20px;
+      padding: 5px;
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="titule">
+
+    <h1>🎉Welcome to hanged!🎉</h1>
+
+  </div>
+  
+
+
+    <div class="create">
+      <h2>Create a Room</h2>
+      <button id="createButton">Start the Fun!</button>
+      <p>🌟 Share this Magical PIN with your friend: 🌟</p>
+      <div id="roomCode">1234-5678</div>
+    </div>
+
+    <div class="entrar">
+      <h2>Join a Room</h2>
+      <input type="text" id="joinInput" placeholder="Enter the Enchanted PIN">
+      <button id="joinButton">Let's Join the Party!</button>
+    </div>
+  
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+socket.on('roomCode', (roomCode) => {
+  const roomCodeDiv = document.getElementById('roomCode');
+  roomCodeDiv.innerText = `Your Room Code: ${roomCode}`;
+});
+
+
+
+  // Crear una nueva sala
+  const createButton = document.getElementById('createButton');
+  createButton.addEventListener('click', () => {
+    socket.emit('createRoom');
+  });
+
+  // Unir a una sala existente
+  const joinButton = document.getElementById('joinButton');
+  const joinInput = document.getElementById('joinInput');
+  joinButton.addEventListener('click', () => {
+    const roomCode = joinInput.value.trim().toUpperCase();
+    console.log('Join button clicked. Room Code:', roomCode);
+    if (roomCode.length === 6) {
+      // Agregar una pequeña espera antes de enviar el código de sala al servidor
+      setTimeout(() => {
+        socket.emit('joinRoom', roomCode);
+      }, 100);
+    }
+  });
+
+// Escuchar el evento de inicio del juego y redirigir a la página del juego
+socket.on('startGame', () => {
+  window.location.href = '/game.html';
+});
+
+
+ 
+
+  // Escuchamos el evento 'error' para mostrar mensajes de error en pantalla
+  socket.on('error', (errorMessage) => {
+    console.log('Error:', errorMessage);
+    // Aquí puedes mostrar el mensaje de error en el cliente si lo deseas
+  });
+  
+  </script>
+</body>
+</html>

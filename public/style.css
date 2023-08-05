@@ -1,0 +1,109 @@
+body {
+
+    display: flex; /* Utilizamos flexbox para centrar el div */
+  justify-content: center; /* Centramos horizontalmente en el eje principal (X) */
+  align-items: center;
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    text-align: center;
+    height: 100vh; /* Aseguramos que el cuerpo de la página ocupe todo el alto de la ventana */
+    margin: 0;
+  }
+
+  
+
+  .centro {
+    border-radius: 5%;
+    text-align: center; 
+    padding: 50px; 
+    border: 1px solid #928f8f; 
+    background-color: #f9f9f9; 
+  }
+  
+  h1 {
+    color: #333;
+  }
+  
+  #hangman-display {
+
+    padding-right: 70%;
+    position: absolute;
+    font-size: 40px;
+    margin: 20px 0;
+    width: 20px;
+  }
+  
+  #word-display {
+    font-size: 30px;
+    margin: 20px 0;
+  }
+  
+  #guesses {
+    font-size: 20px;
+    margin: 20px 30%;
+  }
+  
+  #guess-input {
+    padding: 5px 10px;
+    font-size: 20px;
+  }
+  
+  #guess-button {
+    padding: 8px 20px;
+    font-size: 18px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #guess-button:hover {
+    background-color: #45a049;
+  }
+  
+  #message-box {
+    display: none;
+    padding: 10px;
+    font-size: 18px;
+    background-color: #f44336;
+    color: white;
+    margin: 20px auto;
+    width: 300px;
+    border-radius: 5px;
+  }
+  
+  /* Media query para ajustar el tamaño de la caja de mensaje en dispositivos móviles */
+  @media (max-width: 768px) {
+    #message-box {
+      width: 80%;
+    }
+  }
+
+
+  /* Estilo para las partes del muñeco */
+.hangman-head, .hangman-body, .hangman-legs {
+    width: 40px;
+    height: 40px;
+    background-color: #333;
+    border-radius: 50%;
+    margin: 10px auto;
+  }
+  
+  .hangman-body {
+    width: 10px;
+    height: 80px;
+    background-color: #333;
+    margin: 10px auto;
+  }
+  
+  .hangman-legs {
+    width: 80px;
+    height: 10px;
+    background-color: #333;
+    margin: 10px auto;
+  }
+  
+  /* Clase para ocultar las partes del muñeco */
+  .hidden {
+    display: none;
+  }
